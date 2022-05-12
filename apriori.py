@@ -156,13 +156,13 @@ class Arules:
         larges.pop()
         print('------------------------- Large Itemsets -------------------------')
         for i in larges:
-            print('Large Itemset', i, '\n')
+            print('\n', 'Large Itemset', i)
             for j in self.large_item_sets[i]:
                 print(j, '\t', self.large_item_sets[i][j])
 
         print('\n------------------------- Association Rules -------------------------')
         for i in self.rules:
-            print(i[0], '=>', i[1], '\tlift: ', i[2], 'confidence: ', i[3], 'support: ', i[4], '\n')
+            print(i[0], '=>', i[1], '\tlift: ', i[2], 'confidence: ', i[3], 'support: ', i[4])
 
 
 def read_transactions(transactions):
@@ -196,4 +196,3 @@ if __name__ == '__main__':
         minSupport = options.minS
         minConfidence = options.minC
         a_rules = Arules(options.minS, options.minC)
-
