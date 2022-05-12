@@ -1,9 +1,11 @@
 from sklearn import preprocessing
 import matplotlib.pyplot as plt
+import statistics
 
 
 class Exploratory:
     frequencies = dict()  # key = item, value = support_count
+    transaction_length = list()
 
     def __init__(self, dataset):
         self.items_frequency(dataset)
@@ -22,12 +24,10 @@ class Exploratory:
         self.frequencies = dict(sorted(self.frequencies.items(), key=lambda x: x[1]))
 
     def histogram(self, dataset):
-        items = list()
         for transaction in dataset:
-            for i in transaction:
-                items.append(i)
+            self.transaction_length.append(len(transaction))
         plt.figure(figsize=(10, 6))
-        plt.hist(items)
+        plt.hist(self.transaction_length)
         plt.xlabel('transactions')
         plt.ylabel('numer of items')
         plt.title('Histogram plot\n')
@@ -60,3 +60,12 @@ class Exploratory:
             if self.frequencies[key] == self.frequencies[list(self.frequencies.keys())[0]]:
                 print(key, '   ', end='')
 
+        print('\n\nAverage number of sales related to each item:')
+        print(statistics.mean(self.transaction_length))
+        print('\nMedian number of sales related to each item:')
+        print(statistics.median(self.transaction_length))
+
+        print('\nAverage number of items in transactions:')
+        print(statistics.mean(self.frequencies.values()))
+        print('\nMedian number of items in transactions:')
+        print(statistics.median(self.frequencies.values()))
